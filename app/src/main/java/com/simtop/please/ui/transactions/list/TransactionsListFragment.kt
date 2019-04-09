@@ -8,6 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.simtop.please.R
+import com.simtop.please.data.GNBService
+import kotlinx.android.synthetic.main.transactions_list_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class TransactionsListFragment : Fragment() {
 
@@ -28,6 +33,12 @@ class TransactionsListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         listViewModel = ViewModelProviders.of(this).get(TransactionsListViewModel::class.java)
         // TODO: Use the ViewModel
+
+        val gnbService = GNBService()
+        GlobalScope.launch(Dispatchers.Main) {
+            val transactionsResponse = gnbService.getTransactions().await()
+            textViewTransactions.text = transactionsResponse.subList(0,11).toString()
+        }
     }
 
 }

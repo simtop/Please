@@ -8,6 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.simtop.please.R
+import com.simtop.please.data.GNBService
+import kotlinx.android.synthetic.main.rates_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RatesFragment : Fragment() {
 
@@ -28,6 +33,14 @@ class RatesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(RatesViewModel::class.java)
         // TODO: Use the ViewModel
+
+        val gnbService = GNBService()
+        GlobalScope.launch(Dispatchers.Main) {
+            val ratesResponse = gnbService.getRates().await()
+            textViewRates.text = ratesResponse.toString()
+        }
+
+
     }
 
 }

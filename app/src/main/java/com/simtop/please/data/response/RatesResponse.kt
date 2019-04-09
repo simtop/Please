@@ -1,7 +1,8 @@
 package com.simtop.please.data.response
 
-data class ResponseEntry(
+data class RatesResponse(
+
     val from: String,
     val to: String,
-    val rate: String
+    val rate: Double
 )
