@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation.xml"
+            app:startDestination="@id/ratesFragment">
+
+    <fragment android:id="@+id/ratesFragment" android:name="com.simtop.please.ui.rates.RatesFragment"
+              android:label="rates_fragment" tools:layout="@layout/rates_fragment"/>
+    <fragment android:id="@+id/transactionsListFragment"
+              android:name="com.simtop.please.ui.transactions.list.TransactionsListFragment"
+              android:label="transactions_list_fragment" tools:layout="@layout/transactions_list_fragment"/>
+    <fragment android:id="@+id/transactionsDetailFragment"
+              android:name="com.simtop.please.ui.transactions.detail.TransactionsDetailFragment"
+              android:label="transactions_detail_fragment" tools:layout="@layout/transactions_detail_fragment"/>
+    <fragment android:id="@+id/settingsFragment" android:name="com.simtop.please.ui.settings.SettingsFragment"
+              android:label="SettingsFragment"/>
+</navigation>

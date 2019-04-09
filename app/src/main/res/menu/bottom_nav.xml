@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/ratesFragment"
+            android:title="Rates"/>
+    <item
+            android:id="@+id/transactionsListFragment"
+            android:title="Transactions List"/>
+    <item
+            android:id="@+id/settingsFragment"
+            android:title="Settings"/>
+</menu>
+        <!--android:icon="@drawable/ic_rates" TODO: Look for images-->
+        <!--android:icon="@drawable/ic_transactions" TODO: Look for images-->
+        <!--android:icon="@drawable/ic_settings" TODO: Look for images-->
