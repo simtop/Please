@@ -48,8 +48,9 @@ class TransactionsListFragment : Fragment() {
                 BigDecimal(it.amount).setScale(2,BigDecimal.ROUND_HALF_EVEN)
                 if(it.sku  == compar){
                     total += 1
-             //       round = (round + BigDecimal(it.amount).setScale(2,BigDecimal.ROUND_HALF_EVEN)).setScale(2,BigDecimal.ROUND_HALF_EVEN)
+                    //       round = (round + BigDecimal(it.amount).setScale(2,BigDecimal.ROUND_HALF_EVEN)).setScale(2,BigDecimal.ROUND_HALF_EVEN)
                     round = DecimalOperations.sumDecimalOperations(round,it.amount)
+                    round = DecimalOperations.multiplyDecimalOperations(round, "1.99")
                 }
 
             }
