@@ -11,6 +11,7 @@ import com.simtop.please.data.network.response.RatesResponse
 interface RatesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @JvmSuppressWildcards
     fun insert(rateList: List<RatesResponse>)
 
     @Query("SELECT * FROM rates_list")

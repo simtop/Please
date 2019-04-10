@@ -12,16 +12,19 @@ import com.simtop.please.R
 import com.simtop.please.data.network.ConnectivityInterceptorImpl
 import com.simtop.please.data.network.GNBService
 import com.simtop.please.data.network.PleaseNetworkDataSourceImpl
+import com.simtop.please.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.rates_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class RatesFragment : Fragment() {
+class RatesFragment : ScopedFragment(), KodeinAware {
 
-    companion object {
-        fun newInstance() = RatesFragment()
-    }
+    override val kodein by closestKodein()
+    private val viewModelFactory : RatesViewModelFactory by instance()
 
     private lateinit var viewModel: RatesViewModel
 
@@ -34,10 +37,12 @@ class RatesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RatesViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RatesViewModel::class.java)
 
-        val gnbService = GNBService(ConnectivityInterceptorImpl(this.context!!))
+        bindUI()
+
+
+        /*val gnbService = GNBService(ConnectivityInterceptorImpl(this.context!!))
         val pleaseNetworkDataSource = PleaseNetworkDataSourceImpl(gnbService)
 
         pleaseNetworkDataSource.downloadedRates.observe(this, Observer {
@@ -49,7 +54,15 @@ class RatesFragment : Fragment() {
             pleaseNetworkDataSource.fetchRates()
         }
 
+*/
+    }
 
+    private fun bindUI() = launch{
+        val todaysWeather = viewModel.rates.await()
+        todaysWeather.observe(this@RatesFragment, Observer {
+            if(it == null) return@Observer
+            textViewRates.text = it.toString()
+        })
     }
 
 }
