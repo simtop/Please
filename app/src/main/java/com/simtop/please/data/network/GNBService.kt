@@ -1,10 +1,9 @@
-package com.simtop.please.data
+package com.simtop.please.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.simtop.please.data.response.RatesResponse
-import com.simtop.please.data.response.TransactionsResponse
+import com.simtop.please.data.network.response.RatesResponse
+import com.simtop.please.data.network.response.TransactionsResponse
 import kotlinx.coroutines.Deferred
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,8 +19,10 @@ interface GNBService {
     fun getTransactions() : Deferred<List<TransactionsResponse>>
 
     companion object {
-        operator fun invoke(): GNBService {
+        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor
+        ): GNBService {
             val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()

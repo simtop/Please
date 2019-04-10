@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 
 import com.simtop.please.R
-import com.simtop.please.data.GNBService
+import com.simtop.please.data.network.ConnectivityInterceptorImpl
+import com.simtop.please.data.network.GNBService
+import com.simtop.please.data.network.PleaseNetworkDataSourceImpl
 import kotlinx.android.synthetic.main.rates_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -34,10 +37,16 @@ class RatesFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(RatesViewModel::class.java)
         // TODO: Use the ViewModel
 
-        val gnbService = GNBService()
+        val gnbService = GNBService(ConnectivityInterceptorImpl(this.context!!))
+        val pleaseNetworkDataSource = PleaseNetworkDataSourceImpl(gnbService)
+
+        pleaseNetworkDataSource.downloadedRates.observe(this, Observer {
+            textViewRates.text = it.toString()
+
+        })
+
         GlobalScope.launch(Dispatchers.Main) {
-            val ratesResponse = gnbService.getRates().await()
-            textViewRates.text = ratesResponse.toString()
+            pleaseNetworkDataSource.fetchRates()
         }
 
 

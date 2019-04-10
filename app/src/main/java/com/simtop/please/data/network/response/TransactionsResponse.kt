@@ -1,6 +1,4 @@
-package com.simtop.please.data.response
-
-import java.math.BigDecimal
+package com.simtop.please.data.network.response
 
 data class TransactionsResponse(
     val sku: String,

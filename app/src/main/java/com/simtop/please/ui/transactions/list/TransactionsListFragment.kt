@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.simtop.please.R
-import com.simtop.please.data.GNBService
+import com.simtop.please.data.network.GNBService
 import com.simtop.please.util.DecimalOperations
 import kotlinx.android.synthetic.main.transactions_list_fragment.*
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +35,7 @@ class TransactionsListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         listViewModel = ViewModelProviders.of(this).get(TransactionsListViewModel::class.java)
         // TODO: Use the ViewModel
-
+/*
         val gnbService = GNBService()
         GlobalScope.launch(Dispatchers.Main) {
             val transactionsResponse = gnbService.getTransactions().await()
@@ -55,7 +55,7 @@ class TransactionsListFragment : Fragment() {
 
             }
             textViewTransactions.text = total.toString() + "\n" + round + "\n" + transactionsResponse.subList(0,11)
-        }
+        } */
     }
 
 }
