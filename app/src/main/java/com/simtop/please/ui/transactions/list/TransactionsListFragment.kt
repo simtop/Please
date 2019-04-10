@@ -50,7 +50,7 @@ class TransactionsListFragment : Fragment() {
                     total += 1
                     //       round = (round + BigDecimal(it.amount).setScale(2,BigDecimal.ROUND_HALF_EVEN)).setScale(2,BigDecimal.ROUND_HALF_EVEN)
                     round = DecimalOperations.sumDecimalOperations(round,it.amount)
-                    round = DecimalOperations.multiplyDecimalOperations(round, "1.99")
+                    round = DecimalOperations.divideDecimalOperations(round, "1.99")
                 }
 
             }

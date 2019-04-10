@@ -17,4 +17,11 @@ object DecimalOperations {
 
         return result.toString()
     }
+    fun divideDecimalOperations(amount: String, rate : String) : String {
+        if(amount == "0") return "0"
+        val amountBigDecimal = BigDecimal(amount).setScale(2,BigDecimal.ROUND_HALF_EVEN)
+        val rateBigDecimal = BigDecimal(rate).setScale(2,BigDecimal.ROUND_HALF_EVEN)
+        val result = (amountBigDecimal.divide(rateBigDecimal,2,BigDecimal.ROUND_HALF_EVEN))
+        return result.toString()
+    }
 }
