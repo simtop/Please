@@ -5,11 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.simtop.please.data.network.response.RatesResponse
+import com.simtop.please.data.network.response.TransactionsResponse
 
-@Database(entities = [(RatesResponse::class)], version = 1)
+@Database(entities = [RatesResponse::class, TransactionsResponse::class], version = 1)
 abstract class PleaseDatabase : RoomDatabase(){
 
     abstract fun ratesDao() : RatesDao
+    abstract fun transactionsDao() : TransactionsDao
 
     companion object {
         @Volatile private var instance: PleaseDatabase? = null

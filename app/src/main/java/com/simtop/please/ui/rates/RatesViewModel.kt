@@ -1,6 +1,6 @@
 package com.simtop.please.ui.rates
 
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import com.simtop.please.data.repository.PleaseRepository
 import com.simtop.please.util.lazyDeferred
 

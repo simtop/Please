@@ -1,28 +1,26 @@
 package com.simtop.please.ui.transactions.list
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.simtop.please.R
-import com.simtop.please.data.network.GNBService
-import com.simtop.please.util.DecimalOperations
+import com.simtop.please.ui.base.ScopedFragment
 import kotlinx.android.synthetic.main.transactions_list_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.math.BigDecimal
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class TransactionsListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TransactionsListFragment()
-    }
+class TransactionsListFragment : ScopedFragment(), KodeinAware {
 
-    private lateinit var listViewModel: TransactionsListViewModel
+    override val kodein by closestKodein()
+    private val viewModelFactory : TransactionsListViewModelFactory by instance()
+
+    private lateinit var viewModel: TransactionsListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,29 +31,17 @@ class TransactionsListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listViewModel = ViewModelProviders.of(this).get(TransactionsListViewModel::class.java)
-        // TODO: Use the ViewModel
-/*
-        val gnbService = GNBService()
-        GlobalScope.launch(Dispatchers.Main) {
-            val transactionsResponse = gnbService.getTransactions().await()
-            //textViewTransactions.text = transactionsResponse.toString()
-            var round = "0"
-            //var round = BigDecimal("0").setScale(2,BigDecimal.ROUND_HALF_EVEN)
-            var total = 0
-            val compar = transactionsResponse[0].sku
-            val hola = transactionsResponse.subList(0,11).forEach {
-                BigDecimal(it.amount).setScale(2,BigDecimal.ROUND_HALF_EVEN)
-                if(it.sku  == compar){
-                    total += 1
-                    //       round = (round + BigDecimal(it.amount).setScale(2,BigDecimal.ROUND_HALF_EVEN)).setScale(2,BigDecimal.ROUND_HALF_EVEN)
-                    round = DecimalOperations.sumDecimalOperations(round,it.amount)
-                    round = DecimalOperations.divideDecimalOperations(round, "1.99")
-                }
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TransactionsListViewModel::class.java)
 
-            }
-            textViewTransactions.text = total.toString() + "\n" + round + "\n" + transactionsResponse.subList(0,11)
-        } */
+        bindUI()
+
     }
+    private fun bindUI() = launch{
+        val transactionsList = viewModel.transactions.await()
+        transactionsList.observe(this@TransactionsListFragment, Observer {
+            if(it == null) return@Observer
+            textViewTransactions.text = it.toString()
 
+        })
+    }
 }
