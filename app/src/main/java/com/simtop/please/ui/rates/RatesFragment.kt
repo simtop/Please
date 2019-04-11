@@ -13,6 +13,7 @@ import com.simtop.please.data.network.ConnectivityInterceptorImpl
 import com.simtop.please.data.network.GNBService
 import com.simtop.please.data.network.PleaseNetworkDataSourceImpl
 import com.simtop.please.ui.base.ScopedFragment
+import com.simtop.please.util.MoneyConverter
 import kotlinx.android.synthetic.main.rates_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -41,27 +42,14 @@ class RatesFragment : ScopedFragment(), KodeinAware {
 
         bindUI()
 
-
-        /*val gnbService = GNBService(ConnectivityInterceptorImpl(this.context!!))
-        val pleaseNetworkDataSource = PleaseNetworkDataSourceImpl(gnbService)
-
-        pleaseNetworkDataSource.downloadedRates.observe(this, Observer {
-            textViewRates.text = it.toString()
-
-        })
-
-        GlobalScope.launch(Dispatchers.Main) {
-            pleaseNetworkDataSource.fetchRates()
-        }
-
-*/
     }
 
     private fun bindUI() = launch{
         val todaysWeather = viewModel.rates.await()
         todaysWeather.observe(this@RatesFragment, Observer {
             if(it == null) return@Observer
-            textViewRates.text = it.toString()
+            textViewRates.text = it.toString() + "\n" + MoneyConverter.convertToEur(it)
+
         })
     }
 
