@@ -42,7 +42,6 @@ class RatesFragment : ScopedFragment(), KodeinAware {
         ratesList.observe(this@RatesFragment, Observer {
             if(it == null) return@Observer
             textViewRates.text = it.toString() + "\n" + MoneyConverter.convertToEur(it)
-
         })
     }
 

@@ -56,9 +56,8 @@ class PleaseRepositoryImpl(
             return@withContext transactionsDao.getListTransactions()
         }
     }
-    override suspend fun getTransactionsbySku(findSku : String): LiveData<out List<TransactionsResponse>> {
+    override suspend fun getTransactionsBySku(findSku : String): LiveData<out List<TransactionsResponse>> {
         return withContext(Dispatchers.IO){
-            initPleaseData()
             return@withContext transactionsDao.getListTransactionsBySku(findSku)
         }
     }

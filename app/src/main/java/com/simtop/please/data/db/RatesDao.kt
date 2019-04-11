@@ -17,7 +17,6 @@ interface RatesDao {
     @Query("SELECT * FROM rates_list")
     fun getListRates(): LiveData<List<RatesResponse>>
 
-
     @Query("DELETE FROM rates_list")
     fun deleteOldEntries()
 

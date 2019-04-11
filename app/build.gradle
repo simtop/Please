@@ -26,6 +26,10 @@ android {
     }
 }
 
+androidExtensions{
+    experimental = true
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -75,4 +79,7 @@ dependencies {
 
     implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
 
+    // Groupie RecyclerView
+    implementation 'com.xwray:groupie:2.1.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.1.0'
 }
