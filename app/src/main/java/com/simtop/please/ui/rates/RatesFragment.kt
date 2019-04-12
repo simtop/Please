@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.simtop.please.R
 import com.simtop.please.ui.base.ScopedFragment
-import com.simtop.please.util.MoneyConverter
 import kotlinx.android.synthetic.main.rates_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -41,7 +40,8 @@ class RatesFragment : ScopedFragment(), KodeinAware {
         val ratesList = viewModel.rates.await()
         ratesList.observe(this@RatesFragment, Observer {
             if(it == null) return@Observer
-            textViewRates.text = it.toString() + "\n" + MoneyConverter.convertToEur(it)
+            //textViewRates.text = it.toString() + "\n" + MoneyConverter.convertToEur(it)
+            textViewRates.text = it.toString()
         })
     }
 

@@ -83,5 +83,9 @@ dependencies {
     implementation 'com.xwray:groupie:2.1.0'
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.1.0'
 
+    //Debug Database on Browser
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.0'
+
+    // Preference
+    implementation "androidx.preference:preference:1.0.0"
 }

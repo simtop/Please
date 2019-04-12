@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.simtop.please.R
 import com.simtop.please.ui.base.ScopedFragment
 import com.simtop.please.util.DetailSkuNotFoundException
+import com.simtop.please.util.MoneyConverter
+import com.simtop.please.util.TotalCalculator
 import kotlinx.android.synthetic.main.transactions_detail_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -47,10 +49,26 @@ class TransactionsDetailFragment : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch {
         val transactionsList = viewModel.transactionsSearch.await()
+
+        val ratesList = viewModel.rates.await()
+
+         var tableRates : Array<String> = arrayOf("","","","")
+
+        ratesList.observe(this@TransactionsDetailFragment, Observer {
+            if(it == null) return@Observer
+            //textViewRates.text = it.toString() + "\n" + MoneyConverter.convertToEur(it)
+            //textViewRates.text = it.toString()
+            tableRates = MoneyConverter.convertToEur(it)
+        })
+
+
         transactionsList.observe(this@TransactionsDetailFragment, Observer {
             if (it == null) return@Observer
             //textViewTransactions.text = it.subList(0,7).toString() + " \n" + "\n"
-            textViewSko.text = it[0].sku + " " + it[1].sku
+            val prueba = TotalCalculator.calculateTotal(viewModel.isEur, it,tableRates)
+            textViewSko.text = it[0].sku
+            textViewTotal.text = prueba
+            textViewMoneyType.text = viewModel.isEur
         })
     }
 

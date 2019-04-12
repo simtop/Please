@@ -6,7 +6,7 @@ object MoneyConverter{
 
 
     //Creates Table, allways you need to call it
-    fun convertToEur(listResponse: List<RatesResponse>): String {
+    fun convertToEur(listResponse: List<RatesResponse>): Array<String> {
 
         val eur = "1"
         var usd = "0"
@@ -84,7 +84,9 @@ object MoneyConverter{
                 usd = DecimalOperations.multiplyDecimalOperations(aud,audusd)
             }
         }
+        val eurTable = arrayOf(eur,usd,cad,aud)
 
-        return "EUR + $eur USD = $usd + CAD + $cad + AUD + $aud"
+        //"EUR + $eur USD = $usd + CAD + $cad + AUD + $aud"
+        return eurTable
     }
 }

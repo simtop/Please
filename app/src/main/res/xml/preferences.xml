@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+            android:title="Currency Type">
+        <ListPreference
+                android:key="CURRENCY_TYPE"
+                android:title="Currency Type"
+                android:summary="%s"
+                android:defaultValue="EUR"
+                android:entries="@array/unitTypeEntries"
+                android:entryValues="@array/unitTypeValues">
+            <!-- $s shows the selected item in summary -->
+        </ListPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
