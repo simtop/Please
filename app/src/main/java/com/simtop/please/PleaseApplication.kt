@@ -16,6 +16,7 @@ import com.simtop.please.data.repository.PleaseRepositoryImpl
 import com.simtop.please.ui.rates.RatesViewModelFactory
 import com.simtop.please.ui.transactions.detail.TransactionsDetailViewModelFactory
 import com.simtop.please.ui.transactions.list.TransactionsListViewModelFactory
+import com.simtop.please.util.AppPreferences
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -46,5 +47,7 @@ class PleaseApplication : Application(), KodeinAware {
         //TODO:
         AndroidThreeTen.init(this)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+        AppPreferences.init(this)
+
     }
 }

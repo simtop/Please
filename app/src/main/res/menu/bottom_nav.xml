@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
             android:id="@+id/ratesFragment"
-            android:title="Rates"/>
+            android:title="Rates"
+            android:icon="@drawable/ic_euro_symbol_black_24dp"/>
     <item
             android:id="@+id/transactionsListFragment"
-            android:title="Transactions List"/>
+            android:title="Transactions List"
+            android:icon="@drawable/ic_add_shopping_cart_black_24dp"/>
     <item
             android:id="@+id/settingsFragment"
-            android:title="Settings"/>
+            android:title="Settings"
+            android:icon="@drawable/ic_settings_applications_black_24dp"/>
 </menu>
-        <!--android:icon="@drawable/ic_rates" TODO: Look for images-->
-        <!--android:icon="@drawable/ic_transactions" TODO: Look for images-->
-        <!--android:icon="@drawable/ic_settings" TODO: Look for images-->

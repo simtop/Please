@@ -8,13 +8,16 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Headers
 
 interface GNBService {
 
     //Nothing to Querry
+    @Headers("Accept: application/json")
     @GET("rates.json")
     fun getRates(): Deferred<List<RatesResponse>>
 
+    @Headers("Accept: application/json")
     @GET("transactions.json")
     fun getTransactions() : Deferred<List<TransactionsResponse>>
 
