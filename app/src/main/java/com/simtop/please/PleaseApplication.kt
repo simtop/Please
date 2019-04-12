@@ -34,9 +34,10 @@ class PleaseApplication : Application(), KodeinAware {
             PleaseNetworkDataSourceImpl(instance()) }
         bind<PleaseRepository>() with singleton { PleaseRepositoryImpl(instance(), instance(),instance()) }
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
-        bind() from provider { RatesViewModelFactory(instance()) }
+        bind() from provider { RatesViewModelFactory(instance(),instance()) }
         bind() from provider {TransactionsListViewModelFactory(instance())}
-        bind() from factory { detailSku : String -> TransactionsDetailViewModelFactory(detailSku,instance(),instance()) }
+        bind() from factory { detailSku : String ->
+            TransactionsDetailViewModelFactory(detailSku,instance(),instance()) }
 
     }
 

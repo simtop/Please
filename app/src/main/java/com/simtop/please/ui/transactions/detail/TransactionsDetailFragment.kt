@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.simtop.please.R
@@ -54,22 +55,30 @@ class TransactionsDetailFragment : ScopedFragment(), KodeinAware {
 
          var tableRates : Array<String> = arrayOf("","","","")
 
+        updateAppName()
+        updateFragmentName()
+
         ratesList.observe(this@TransactionsDetailFragment, Observer {
             if(it == null) return@Observer
-            //textViewRates.text = it.toString() + "\n" + MoneyConverter.convertToEur(it)
-            //textViewRates.text = it.toString()
             tableRates = MoneyConverter.convertToEur(it)
         })
 
 
         transactionsList.observe(this@TransactionsDetailFragment, Observer {
             if (it == null) return@Observer
-            //textViewTransactions.text = it.subList(0,7).toString() + " \n" + "\n"
             val prueba = TotalCalculator.calculateTotal(viewModel.isEur, it,tableRates)
             textViewSko.text = it[0].sku
             textViewTotal.text = prueba
             textViewMoneyType.text = viewModel.isEur
         })
+    }
+
+    private fun updateFragmentName() {
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Total Spent on Product"
+    }
+
+    private fun updateAppName() {
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "P.L.E.A.S.E."
     }
 
 }

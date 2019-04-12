@@ -84,9 +84,8 @@ object MoneyConverter{
                 usd = DecimalOperations.multiplyDecimalOperations(aud,audusd)
             }
         }
-        val eurTable = arrayOf(eur,usd,cad,aud)
 
         //"EUR + $eur USD = $usd + CAD + $cad + AUD + $aud"
-        return eurTable
+        return arrayOf(eur,usd,cad,aud)
     }
 }

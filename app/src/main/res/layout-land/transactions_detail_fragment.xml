@@ -12,8 +12,9 @@
             android:layout_height="80dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
             tools:text="SKO"
-            tools:layout_editor_absoluteY="29dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="136dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="136dp" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
             android:id="@+id/textViewTotal"
@@ -34,7 +35,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/textViewTotal" app:layout_constraintVertical_bias="0.56"
             app:layout_constraintStart_toEndOf="@+id/textViewTotal" android:layout_marginStart="8dp"/>
     <TextView
-            android:text="TOTAL"
+            android:text="@string/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewTextTotal"

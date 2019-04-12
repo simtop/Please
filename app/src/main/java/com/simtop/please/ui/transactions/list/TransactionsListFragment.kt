@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -45,12 +46,18 @@ class TransactionsListFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() = launch {
+
         val transactionsList = viewModel.transactions.await()
+
+        updateAppName()
+        updateFragmentName()
         transactionsList.observe(this@TransactionsListFragment, Observer {
             if (it == null) return@Observer
             //textViewTransactions.text = it.subList(0,7).toString() + " \n" + "\n"
+
             group_loading.visibility = View.GONE
             initRecyclerView(it.toTransactionResponseItems())
+
         })
     }
 
@@ -80,5 +87,13 @@ class TransactionsListFragment : ScopedFragment(), KodeinAware {
         return this.map {
             TransactionsListItem(it)
         }
+    }
+
+    private fun updateFragmentName() {
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "List of Transactions"
+    }
+
+    private fun updateAppName() {
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "P.L.E.A.S.E."
     }
 }
