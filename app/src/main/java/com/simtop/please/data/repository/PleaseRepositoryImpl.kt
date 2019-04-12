@@ -56,18 +56,20 @@ class PleaseRepositoryImpl(
             return@withContext transactionsDao.getListTransactions()
         }
     }
-    override suspend fun getTransactionsBySku(findSku : String): LiveData<out List<TransactionsResponse>> {
+    override suspend fun getTransactionsBySku(detailSku : String): LiveData<out List<TransactionsResponse>> {
         return withContext(Dispatchers.IO){
-            return@withContext transactionsDao.getListTransactionsBySku(findSku)
+            initPleaseData()
+            return@withContext transactionsDao.getListTransactionsBySku(detailSku)
         }
     }
 
     private suspend fun initPleaseData(){
         //TODO: look for dummytime need
-        val dummyTime = ZonedDateTime.now().minusHours(1)
-        if(isFetchingTodayNeeded(dummyTime))
+        val dummyTime = ZonedDateTime.now() //.minusHours(1)
+        if(isFetchingTodayNeeded(dummyTime)) {
             fetchRates()
             fetchTransactions()
+        }
     }
 
     private  suspend fun fetchRates(){

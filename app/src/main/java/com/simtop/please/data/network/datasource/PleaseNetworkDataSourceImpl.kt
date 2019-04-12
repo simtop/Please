@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.simtop.please.data.network.GNBService
 import com.simtop.please.data.network.response.RatesResponse
 import com.simtop.please.data.network.response.TransactionsResponse
-import com.simtop.please.util.NoConnectivityExeption
+import com.simtop.please.util.NoConnectivityException
 
 class PleaseNetworkDataSourceImpl(
     private val gnbService: GNBService) : PleaseNetworkDataSource {
@@ -25,10 +25,9 @@ class PleaseNetworkDataSourceImpl(
             val fetchedRates = gnbService
                 .getRates()
                 .await()
-            //TODO:Mirar fetchedRates
             _downloadedRates.postValue(fetchedRates)
         }
-        catch (e: NoConnectivityExeption) {
+        catch (e: NoConnectivityException) {
             Log.e("Connectivity", "No internet connection.", e)
         }
     }
@@ -40,7 +39,7 @@ class PleaseNetworkDataSourceImpl(
                 .await()
             _downloadedTransactions.postValue(fetchedTransactions)
         }
-        catch (e: NoConnectivityExeption) {
+        catch (e: NoConnectivityException) {
             Log.e("Connectivity", "No internet connection.", e)
         }
     }

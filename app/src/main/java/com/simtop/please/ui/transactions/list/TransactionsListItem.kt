@@ -7,7 +7,7 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.items_list_transitions.*
 
 class TransactionsListItem(
-    private val transactionEntry: TransactionsResponse
+    val transactionEntry: TransactionsResponse
 ) : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {

@@ -17,8 +17,8 @@ interface TransactionsDao {
     fun getListTransactions(): LiveData<List<TransactionsResponse>>
 
     //TODO : check the query
-    @Query("SELECT * FROM transactions_list WHERE sku == :findSku")
-    fun getListTransactionsBySku(findSku : String): LiveData<List<TransactionsResponse>>
+    @Query("SELECT * FROM transactions_list WHERE sku = :detailSku")
+    fun getListTransactionsBySku(detailSku : String): LiveData<List<TransactionsResponse>>
 
     @Query("DELETE FROM transactions_list")
     fun deleteOldEntries()

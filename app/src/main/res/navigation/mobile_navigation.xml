@@ -8,10 +8,15 @@
               android:label="rates_fragment" tools:layout="@layout/rates_fragment"/>
     <fragment android:id="@+id/transactionsListFragment"
               android:name="com.simtop.please.ui.transactions.list.TransactionsListFragment"
-              android:label="transactions_list_fragment" tools:layout="@layout/transactions_list_fragment"/>
+              android:label="transactions_list_fragment" tools:layout="@layout/transactions_list_fragment">
+        <action android:id="@+id/actionDetail"
+                app:destination="@id/transactionsDetailFragment"/>
+    </fragment>
     <fragment android:id="@+id/transactionsDetailFragment"
               android:name="com.simtop.please.ui.transactions.detail.TransactionsDetailFragment"
-              android:label="transactions_detail_fragment" tools:layout="@layout/transactions_detail_fragment"/>
+              android:label="transactions_detail_fragment" tools:layout="@layout/transactions_detail_fragment">
+        <argument android:name="detailSku" app:argType="string"/>
+    </fragment>
     <fragment android:id="@+id/settingsFragment" android:name="com.simtop.please.ui.settings.SettingsFragment"
               android:label="SettingsFragment"/>
 </navigation>

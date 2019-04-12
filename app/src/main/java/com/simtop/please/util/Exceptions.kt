@@ -2,4 +2,5 @@ package com.simtop.please.util
 
 import java.io.IOException
 
-class NoConnectivityExeption : IOException()
+class NoConnectivityException : IOException()
+class DetailSkuNotFoundException() : Exception()

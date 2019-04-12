@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.simtop.please.R
 import com.simtop.please.data.network.response.TransactionsResponse
@@ -66,9 +66,14 @@ class TransactionsListFragment : ScopedFragment(), KodeinAware {
 
         groupAdapter.setOnItemClickListener { item, view ->
             (item as? TransactionsListItem)?.let {
-                Toast.makeText(this@TransactionsListFragment.context, "Clicked",Toast.LENGTH_SHORT).show()
+                showTransactionDetail(it.transactionEntry.sku,view)
             }
         }
+    }
+
+    private fun showTransactionDetail(detailSku : String, view : View){
+        val actionDetail = TransactionsListFragmentDirections.actionDetail(detailSku)
+        Navigation.findNavController(view).navigate(actionDetail)
     }
 
     private fun List<TransactionsResponse>.toTransactionResponseItems(): List<TransactionsListItem> {

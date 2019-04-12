@@ -11,14 +11,12 @@ import com.simtop.please.data.network.datasource.PleaseNetworkDataSourceImpl
 import com.simtop.please.data.repository.PleaseRepository
 import com.simtop.please.data.repository.PleaseRepositoryImpl
 import com.simtop.please.ui.rates.RatesViewModelFactory
+import com.simtop.please.ui.transactions.detail.TransactionsDetailViewModelFactory
 import com.simtop.please.ui.transactions.list.TransactionsListViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.kodein.di.generic.*
 
 class PleaseApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
@@ -34,6 +32,7 @@ class PleaseApplication : Application(), KodeinAware {
         bind<PleaseRepository>() with singleton { PleaseRepositoryImpl(instance(), instance(),instance()) }
         bind() from provider { RatesViewModelFactory(instance()) }
         bind() from provider {TransactionsListViewModelFactory(instance())}
+        bind() from factory { detailSku : String -> TransactionsDetailViewModelFactory(detailSku,instance()) }
 
     }
 
