@@ -1,7 +1,7 @@
 # P.L.E.A.S.E.
 Provide Legal Exculpation And Sign Everything
 
-The app follows the architecture MVVM, uses LiveData, Room, ViewModels, Kodein, Coroutines, Navigation, Retrofit, okHttp, GSON, Material Design, Preferences, threetenabp library of Jake Wharton which helps us with better date/time management and amitshekhar library for debugging the database in a browser. 
+The app follows the architecture MVVM, uses LiveData, Room, ViewModels, Kodein, Coroutines, Navigation, Retrofit, okHttp, GSON, Material Design, Preferences, Groupi library for doing Recyclerview, threetenabp library of Jake Wharton which helps us with better date/time management and amitshekhar library for debugging the database in a browser. 
 
 
 
